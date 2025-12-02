@@ -4,7 +4,7 @@ import yfinance as yf
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import GRU, Dense, Dropout
+from tensorflow.keras.layers import LSTM, Dense, Dropout
 import matplotlib.pyplot as plt
 
 # Load data
@@ -36,9 +36,9 @@ x_test  = x_test.reshape((-1, 60, 1))
 
 # Build GRU model
 model = Sequential([
-    GRU(50, return_sequences=True, input_shape=(60,1)),
+    LSTM(50, return_sequences=True, input_shape=(60,1)),
     Dropout(0.2),
-    GRU(50),
+    LSTM(50,return_sequences=False),
     Dropout(0.2),
     Dense(25),
     Dense(1)
